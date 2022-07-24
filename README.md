@@ -23,7 +23,11 @@ CC7-L2-C6
 - Instance type: m5.large (8GiB RAM + 2 vCPU)
 - Platform: Amazon Linux 2
 
-#### 2. Create SSH Key Locally (in Cloud9)
+#### 2. Increase Environment Volume Size
+
+AWS > EC2 > Volumes > Select Volume > Actions > Modify Volume > set to at least 20GiB
+
+#### 3. Create SSH Key Locally (in Cloud9)
 
 Needed only first time in new AWS Cloud9 environment
 
@@ -32,14 +36,14 @@ ssh-keygen -t rsa
 cat path_public_key_saved_to
 ```
 
-#### 3. Copy the Public SSH Key and Add it to Github
+#### 4. Copy the Public SSH Key and Add it to Github
 
 Github > Settings > SSH and GPG keys > New SSH key
 
 - Title: udacityProject4
 - Key: public ssh key
 
-#### 4. Clone Repository via SSH (in Cloud9)
+#### 5. Clone Repository via SSH (in Cloud9)
 
 ```shell
 git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
@@ -85,13 +89,7 @@ Hint: ensure using same email address as that in AWS
 
 ## B. Running The Python Scripts & Web App
 
-### 1. Clone the Repository
-
-```shell
-git clone https://github.com/pkiage/project-ml-microservice-kubernetes.git
-```
-
-Go to repository root folder
+### 1. Go to repository root folder
 
 ```shell
 cd project-ml-microservice-kubernetes
@@ -112,9 +110,10 @@ make install
 ```
 
 ```shell
-wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 && chmod+x /bin/hadolint
-```
+sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 
 
+sudo chmod +x /bin/hadolint
+```
 
 #### Confirm Requirementes Installed
 
