@@ -23,7 +23,7 @@ dockerpath="pkiage/mlapi"
 # Step 2:  
 # Authenticate & tag
 ## Authenticate
-docker login --username pkiage
+docker login
 
 ## Tag
 ### tag should be similar to that specified in run_docker.sh

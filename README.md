@@ -109,16 +109,28 @@ source /tmp/local_environments/.devops/bin/activate
 make install
 ```
 
+Hadolint:
+
 ```shell
 sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 
 
 sudo chmod +x /bin/hadolint
 ```
 
+Kubernetes (Minikube):
+
+```shell
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
 #### Confirm Requirementes Installed
 
 ```shell
 docker --version
+
+kubectl version
 ```
 
 ### 3. Run Lint Check
@@ -127,7 +139,7 @@ docker --version
 make lint
 ```
 
-### 4. [Optional] Run App Locally (standalone)
+### 4. [optional] Run App Locally (standalone)
 
 ```shell
 python3 app.py
@@ -138,13 +150,13 @@ python3 app.py
 #### Run and Build a Docker Image
 
 ```shell
-./run_docker.sh
+sudo sh run_docker.sh
 ```
 
 #### Make a Prediction
 
 ```shell
-./make_prediction.sh
+sh make_prediction.sh
 ```
 
 docker_out.txt
