@@ -8,11 +8,14 @@ In this project, you will apply the skills you have acquired in this course to o
 
 You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
-## B. [Optional] Setup to Run from Cloud9 or Remote VS Code
+## B. [Optional] Setup to Run from Cloud9 or VSCode Remote Explorer
 
 Helps with environment standardization that simplifies installation and configuration. (CC7-L2-C6)
 
 ### Cloud9
+
+CC7-L2-C6
+
 #### 1. AWS > Cloud9 > Create New Environment
 
 - Name: name (e.g. udacityProject4)
@@ -41,6 +44,44 @@ Github > Settings > SSH and GPG keys > New SSH key
 ```shell
 git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
 ```
+
+### [VSCode Remote Explorer](https://dev.to/cindyledev/remote-development-with-visual-studio-code-on-aws-ec2-4cla)
+
+#### 1. AWS > EC2 > Launch Instance
+
+- Name: udacityProject4-server
+- AMI: Ubuntu Server 18.04
+- Instance type: t3.small or greater
+- Key pair: select one (that is downloaded on PC)
+- Security group: group where inbound rule as below
+    - Type: SSH; Source: Anywhere IPv4
+- Configure storage: 20GiB or more
+
+#### 2. VSCode Remote Explorer
+
+Hint: Don't open VSCode from WSL, rather navitage to the repository using file explorer then open it with VSCode.
+
+VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Configure SSH Host... > C:\User\xxx\.[ssh\config](https://linux.die.net/man/5/ssh_config)
+
+```config
+Host connection_name
+    HostName public_ipv4_address
+    User aws_ec2_user1
+    IdentityFile path_to_ssh_key
+```
+
+- connection_name: udacity_project4
+- path_to_ssh_key: C:\Users\user_name\.ssh\key_name.pem
+
+#### 3. [if permission denied (public key)] Public Key Settings 
+
+```shell
+icacls.exe path_to_ssh_key /reset
+icacls.exe path_to_ssh_key /grant:r "$($env:username):(r)"
+icacls.exe path_to_ssh_key /inheritance:r
+```
+
+Hint: ensure using same email address as that in AWS
 
 ## B. Running The Python Scripts & Web App
 
