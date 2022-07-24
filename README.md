@@ -111,6 +111,11 @@ source /tmp/local_environments/.devops/bin/activate
 make install
 ```
 
+```shell
+wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 && chmod+x /bin/hadolint
+```
+
+
 #### Confirm Requirementes Installed
 
 ```shell
