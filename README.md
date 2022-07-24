@@ -65,7 +65,7 @@ git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
 
 Hint: Don't open VSCode from WSL, rather navitage to the repository using file explorer then open it with VSCode.
 
-VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Configure SSH Host... > C:\User\xxx\.ssh\config 
+VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Configure SSH Host... > `C:\User\xxx\.ssh\config`
 
 ```config
 Host connection_name
@@ -85,7 +85,16 @@ icacls.exe path_to_ssh_key /grant:r "$($env:username):(r)"
 icacls.exe path_to_ssh_key /inheritance:r
 ```
 
-Hint: ensure using same email address as that in AWS
+Hint: 
+- Ensure using same email address as that in AWS
+- Ensure using the correct aws configure
+
+#### 3. [if error: "The process tried to write to a nonexistent pipe" ](https://stackoverflow.com/questions/60335069/vscode-remote-connection-error-the-process-tried-to-write-to-a-nonexistent-pipe)
+1. Delete ssh config folder both in C:\Program Data\ssh and C:\<user>\.ssh
+2. VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Add New SSH Host.. 
+3. ssh -i "C:\path\to\key" user@host
+4. Select `C:\<user>\.ssh`
+5. Click connect
 
 ## B. Running The Python Scripts & Web App
 

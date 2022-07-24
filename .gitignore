@@ -3,3 +3,4 @@ ssh_config
 chmod400
 ignore
 .vscode
+.pem
