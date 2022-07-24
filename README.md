@@ -147,6 +147,8 @@ python3 app.py
 ./make_prediction.sh
 ```
 
+docker_out.txt
+
 ### 5. Upload the Docker Image
 
 ```shell
@@ -178,6 +180,8 @@ kubectl config view
 ```shell
 ./make_prediction.sh
 ```
+
+kubernetes.out.txt
 
 ## C. Files In The Repository
 ```folder-structure
