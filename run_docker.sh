@@ -13,11 +13,11 @@
 # Build image and add a descriptive tag
 
 # name and optionally a tag in the 'name:tag' format
-docker build --tag=mlapi .
+sudo docker build --tag=mlapi .
 
 # Step 2: 
 # List docker images
-docker image ls
+sudo docker image ls
 
 # Step 3: 
 # Run flask app
@@ -25,4 +25,4 @@ docker image ls
 # 80 from Dockerfile
 
 # publish a container's port(s) to the host
-docker run -p 8000:80 mlapi
+sudo docker run -p 8000:80 mlapi
