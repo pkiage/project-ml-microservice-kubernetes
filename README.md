@@ -2,28 +2,25 @@
 
 # Udacity - Cloud DevOps Engineering - Project 4: Operationalize Machine Learning Microservice API
 
-## Project Summary
+## A. Project Summary
 
 In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
 
 You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
-## [Optional] Run from Cloud9 or Remote VS Code
+## B. [Optional] Setup to Run from Cloud9 or Remote VS Code
 
 Helps with environment standardization that simplifies installation and configuration. (CC7-L2-C6)
 
 ### Cloud9
-1. AWS > Cloud9 > Create New Environment
+#### 1. AWS > Cloud9 > Create New Environment
 
-Name: name (e.g. udacityProject4)
+- Name: name (e.g. udacityProject4)
+- Environment type: Create a new instance for environment (EC2)
+- Instance type: m5.large (8GiB RAM + 2 vCPU)
+- Platform: Amazon Linux 2
 
-Environment type: Create a new instance for environment (EC2)
-
-Instance type: m5.large (8GiB RAM + 2 vCPU)
-
-Platform: Amazon Linux 2
-
-2. Create SSH Key Locally (in Cloud9)
+#### 2. Create SSH Key Locally (in Cloud9)
 
 Needed only first time in new AWS Cloud9 environment
 
@@ -32,32 +29,34 @@ ssh-keygen -t rsa
 cat path_public_key_saved_to
 ```
 
-3. Copy the Public SSH Key and Add it to Github
+#### 3. Copy the Public SSH Key and Add it to Github
 
 Github > Settings > SSH and GPG keys > New SSH key
 
-Title: udacityProject4
-Key: public ssh key
+- Title: udacityProject4
+- Key: public ssh key
 
-4. Clone Repository via SSH in Cloud9
+#### 4. Clone Repository via SSH (in Cloud9)
 
 ```shell
 git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
 ```
 
-### Remote VSCode
+## B. Running The Python Scripts & Web App
 
-
-
-## Running The Python Scripts & Web App
-
-### Clone the Repository
+### 1. Clone the Repository
 
 ```shell
 git clone https://github.com/pkiage/project-ml-microservice-kubernetes.git
 ```
 
-### Create and Activate Environment
+Go to repository root folder
+
+```shell
+cd project-ml-microservice-kubernetes
+```
+
+### 2. Create and Activate Environment
 
 ```shell
 mkdir /tmp/local_environments
@@ -66,8 +65,6 @@ source /tmp/local_environments/.devops/bin/activate
 ```
 
 #### Install Dependencies
-
-In repository root henceforth
 
 ```shell
 make install
@@ -79,19 +76,19 @@ make install
 docker --version
 ```
 
-### Run Lint Check
+### 3. Run Lint Check
 
 ```shell
 make lint
 ```
 
-### [Optional] Run App Locally (standalone)
+### 4. [Optional] Run App Locally (standalone)
 
 ```shell
 python3 app.py
 ```
 
-### Run a Container & Make a Prediction
+### 4. Run a Container & Make a Prediction
 
 #### Run and Build a Docker Image
 
@@ -105,13 +102,13 @@ python3 app.py
 ./make_prediction.sh
 ```
 
-### Upload the Docker Image
+### 5. Upload the Docker Image
 
 ```shell
 ./upload_docker.sh
 ```
 
-### Configure Kubernetes to Run Locally
+### 6. Configure Kubernetes to Run Locally
 
 ```shell
 minikube start
@@ -123,7 +120,7 @@ minikube start
 kubectl config view
 ```
 
-### Deploy with Kubernetes and Save Output Logs
+### 7. Deploy with Kubernetes and Save Output Logs
 
 #### Deploy Application on the Kubernetes Cluster
 
@@ -137,18 +134,18 @@ kubectl config view
 ./make_prediction.sh
 ```
 
-## Files In The Repository
+## C. Files In The Repository
 ```folder-structure
 ├── .circleci               
 │   └── config.yml                        ### CircleCI configuration file
 ├── model_data  
-|   ├── boston_housing_prediction.joblib  ### Presisted Python object to be loaded in app.py
-|   └── housing.csv                       
+|   ├── boston_housing_prediction.joblib  ### Presisted Python object to be loaded in app.py (pre-trained model)
+|   └── housing.csv                       ### Data used in pre-trained model                      
 ├── output_txt_files 
 |   ├── docker_out.txt                    ### Log statements from app.py following executing run_docker.sh
 |   └── kubernetes_out.txt                ### Log statements after running a prediction via Kubernetes deployment
 ├── .gitignore                            ### Files and directories to ignore from git history
-├── app.py                                ### Data used for prediction
+├── app.py                                ### Python flask app that serves out predictions (inference) about housing prices through API calls
 ├── Dockerfile                            ### Contains all commands a user could call on command line to assemble an image
 ├── make_predictions.sh                   ### Sends some input into containerized application via appropriate port
 ├── requirements.txt                      ### List of Python dependencies for the project
