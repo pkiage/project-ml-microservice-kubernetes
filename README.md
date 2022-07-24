@@ -1,50 +1,108 @@
 [![pkiage](https://circleci.com/gh/pkiage/project-ml-microservice-kubernetes.svg?style=svg)](https://app.circleci.com/pipelines/github/pkiage/project-ml-microservice-kubernetes)
 
-## Project Overview
+# Udacity - Cloud DevOps Engineering - Project 4: Operationalize Machine Learning Microservice API
+
+## Project Summary
 
 In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
 
 You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
-### Project Tasks
+## Running The Python Scripts & Web App
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
+### Clone the Repository
 
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
-
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
-
----
-
-## Setup the Environment
-
-* Create a virtualenv with Python 3.7 and activate it. Refer to this link for help on specifying the Python version in the virtualenv. 
-```bash
-python3 -m pip install --user virtualenv
-# You should have Python 3.7 available in your host. 
-# Check the Python path using `which python3`
-# Use a command similar to this one:
-python3 -m virtualenv --python=<path-to-Python3.7> .devops
-source .devops/bin/activate
+```shell
+git clone https://github.com/pkiage/project-ml-microservice-kubernetes.git
 ```
-* Run `make install` to install the necessary dependencies
 
-### Running `app.py`
+### Create and Activate Environment
 
-1. Standalone:  `python app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
+```shell
+python3 -m venv ~/.devops
+source ~/.devops/bin/activate
+```
+#### Install dependencies
 
-### Kubernetes Steps
+```shell
+make install
+```
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+#### Confirm all requirementes installed
+
+```shell
+docker --version
+```
+
+### Run Lint Check
+
+```shell
+make lint
+```
+
+### Run a Container & Make a Prediction
+
+#### Run and build a Docker image
+
+```shell
+./run_docker.sh
+```
+
+#### Make a prediction
+
+```shell
+./make_prediction.sh
+```
+
+### Upload the Docker Image
+
+```shell
+./upload_docker.sh
+```
+
+### Configure Kubernetes to Run Locally
+
+```shell
+minikube start
+```
+
+#### Verify
+
+```shell
+kubectl config view
+```
+
+### Deploy with Kubernetes and Save Output Logs
+
+#### Deploy application on the Kubernetes cluster
+
+```shell
+./run_kubernetes.sh
+```
+
+#### Make a Prediction
+
+```shell
+./make_prediction.sh
+```
+
+## Files In The Repository
+```folder-structure
+├── .circleci               
+│   └── config.yml                        ### 
+├── model_data  
+|   ├── boston_housing_prediction.joblib  ###
+|   └── housing.csv                       ###  
+├── output_txt_files 
+|   ├── docker_out.txt                    ### Log statements from app.py following executing run_docker.sh
+|   └── kubernetes_out.txt                ### Log statements after running a prediction via Kubernetes deployment
+├── .gitignore                            ###
+├── app.py                                ###
+├── Dockerfile                            ### Contains all commands a user could call on command line to assemble an image
+├── make_predictions.sh                   ### Sends some input into containerized application via appropriate port
+├── requirements.txt                      ###
+├── rubric.png                            ### Udacity Project 4 Rubric
+├── run_docker.sh                         ### Enables getting Docker running, locally
+├── run_kubernetes.sh                     ### Deploys application on the Kubernetes cluster (after uploaded docker image and configured Kubernetes so that a cluster is running)
+├── upload_docker.sh                      ### Uploads built image to docker to make it accessible to a Kubernets cluster
+```
