@@ -13,7 +13,7 @@
 # Build image and add a descriptive tag
 
 # name and optionally a tag in the 'name:tag' format
-docker build --tag mlapi .
+docker build --tag=mlapi .
 
 # Step 2: 
 # List docker images
@@ -25,4 +25,4 @@ docker image ls
 # 80 from Dockerfile
 
 # publish a container's port(s) to the host
-docker run --publish 8000:80 mlapi
+docker run -p 8000:80 mlapi
