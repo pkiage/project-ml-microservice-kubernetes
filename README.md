@@ -8,6 +8,14 @@ In this project, you will apply the skills you have acquired in this course to o
 
 You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
 
+## [Optional] Run from Cloud9 or Remote VS Code
+
+Helps with environment standardization that simplifies installation and configuration. (CC7-L2-C6)
+
+### Cloud9
+
+### Remote VSCode
+
 ## Running The Python Scripts & Web App
 
 ### Clone the Repository
@@ -19,16 +27,20 @@ git clone https://github.com/pkiage/project-ml-microservice-kubernetes.git
 ### Create and Activate Environment
 
 ```shell
-python3 -m venv ~/.devops
-source ~/.devops/bin/activate
+mkdir /tmp/local_environments
+python3 -m venv /tmp/local_environments/.devops
+source /tmp/local_environments/.devops/bin/activate
 ```
-#### Install dependencies
+
+#### Install Dependencies
+
+In repository root henceforth
 
 ```shell
 make install
 ```
 
-#### Confirm all requirementes installed
+#### Confirm Requirementes Installed
 
 ```shell
 docker --version
@@ -40,15 +52,21 @@ docker --version
 make lint
 ```
 
+### [Optional] Run App Locally (standalone)
+
+```shell
+python3 app.py
+```
+
 ### Run a Container & Make a Prediction
 
-#### Run and build a Docker image
+#### Run and Build a Docker Image
 
 ```shell
 ./run_docker.sh
 ```
 
-#### Make a prediction
+#### Make a Prediction
 
 ```shell
 ./make_prediction.sh
@@ -74,7 +92,7 @@ kubectl config view
 
 ### Deploy with Kubernetes and Save Output Logs
 
-#### Deploy application on the Kubernetes cluster
+#### Deploy Application on the Kubernetes Cluster
 
 ```shell
 ./run_kubernetes.sh
