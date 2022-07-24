@@ -61,7 +61,7 @@ git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
 
 Hint: Don't open VSCode from WSL, rather navitage to the repository using file explorer then open it with VSCode.
 
-VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Configure SSH Host... > C:\User\xxx\.[ssh\config](https://linux.die.net/man/5/ssh_config)
+VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Configure SSH Host... > C:\User\xxx\.ssh\config 
 
 ```config
 Host connection_name
