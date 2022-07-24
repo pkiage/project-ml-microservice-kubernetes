@@ -89,18 +89,18 @@ kubectl config view
 ## Files In The Repository
 ```folder-structure
 ├── .circleci               
-│   └── config.yml                        ### 
+│   └── config.yml                        ### CircleCI configuration file
 ├── model_data  
-|   ├── boston_housing_prediction.joblib  ###
-|   └── housing.csv                       ###  
+|   ├── boston_housing_prediction.joblib  ### Presisted Python object to be loaded in app.py
+|   └── housing.csv                       
 ├── output_txt_files 
 |   ├── docker_out.txt                    ### Log statements from app.py following executing run_docker.sh
 |   └── kubernetes_out.txt                ### Log statements after running a prediction via Kubernetes deployment
-├── .gitignore                            ###
-├── app.py                                ###
+├── .gitignore                            ### Files and directories to ignore from git history
+├── app.py                                ### Data used for prediction
 ├── Dockerfile                            ### Contains all commands a user could call on command line to assemble an image
 ├── make_predictions.sh                   ### Sends some input into containerized application via appropriate port
-├── requirements.txt                      ###
+├── requirements.txt                      ### List of Python dependencies for the project
 ├── rubric.png                            ### Udacity Project 4 Rubric
 ├── run_docker.sh                         ### Enables getting Docker running, locally
 ├── run_kubernetes.sh                     ### Deploys application on the Kubernetes cluster (after uploaded docker image and configured Kubernetes so that a cluster is running)
