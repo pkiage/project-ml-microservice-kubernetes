@@ -1,4 +1,4 @@
-<include a CircleCI status badge, here>
+[![pkiage](https://circleci.com/gh/pkiage/project-ml-microservice-kubernetes.svg?style=svg)](https://app.circleci.com/pipelines/github/pkiage/project-ml-microservice-kubernetes)
 
 ## Project Overview
 
