@@ -13,8 +13,41 @@ You are given a pre-trained, `sklearn` model that has been trained to predict ho
 Helps with environment standardization that simplifies installation and configuration. (CC7-L2-C6)
 
 ### Cloud9
+1. AWS > Cloud9 > Create New Environment
+
+Name: name (e.g. udacityProject4)
+
+Environment type: Create a new instance for environment (EC2)
+
+Instance type: m5.large (8GiB RAM + 2 vCPU)
+
+Platform: Amazon Linux 2
+
+2. Create SSH Key Locally (in Cloud9)
+
+Needed only first time in new AWS Cloud9 environment
+
+```shell
+ssh-keygen -t rsa
+cat path_public_key_saved_to
+```
+
+3. Copy the Public SSH Key and Add it to Github
+
+Github > Settings > SSH and GPG keys > New SSH key
+
+Title: udacityProject4
+Key: public ssh key
+
+4. Clone Repository via SSH in Cloud9
+
+```shell
+git clone git@github.com:pkiage/project-ml-microservice-kubernetes.git
+```
 
 ### Remote VSCode
+
+
 
 ## Running The Python Scripts & Web App
 
