@@ -32,7 +32,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <form action="{{url_for('predict')}}" method="post" role="form">
+        <form action="{{url_for('predict')}}" method="post">
             <div class="form-group mt-3">
                 <label for="chas">Charles River dummy variable: <br>
                     <span class="fst-italic">1 if tract bounds river; 0 otherwise</span>
@@ -68,11 +68,16 @@
             </div>
             <div class="container">
                 <div class="text-center">
-                    <button class="btn btn-primary btn-lg mt-3" type="submit button">Predict</button>
+                    <button class="btn btn-primary btn-lg mt-3" type="submit">Predict</button>
                 </div>
             </div>
 
         </form>
+
+    </div>
+
+    <div class="container">
+        <p class="text-center mt-4">{{ result }}</p>
     </div>
 
 </body>
