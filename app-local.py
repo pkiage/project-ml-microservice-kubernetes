@@ -65,6 +65,7 @@ def predict():
 
         """
     # Log inputs
+    # https://www.kaggle.com/c/boston-housing
     chas = int(log_inputs("chas"))
 
     rm = log_inputs("rm")
@@ -73,6 +74,7 @@ def predict():
 
     ptratio = log_inputs("ptratio")
 
+    # https://github.com/scikit-learn/scikit-learn/issues/16155
     b = log_inputs("b")
 
     lsat = log_inputs("lsat")

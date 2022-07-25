@@ -256,11 +256,27 @@ kubectl version --output=yaml
 
 ### 3. Run Lint Check
 
+Task 1: Complete the Dockerfile 
+- After you complete this file and save it, it is recommended that you go back to your terminal and run make lint again to see if hadolint catches any errors in your Dockerfile.
+- You are required to pass these lint checks to pass the project.
+
 ```shell
 make lint
 ```
 
 ### 4. Run a Container & Make a Prediction
+
+Task 2: Run a Container & Make a Prediction
+- run_docker.sh
+  - After a brief waiting period, you should see messages indicating a successful build, along with some indications that your app is being served on port 80 (also, a warning about the development server is to be expected, here).
+- make_prediction.sh
+  - In the prediction window, you should see the value of the prediction, and in your main window, where it indicates that your application is running, you should see some log statements print out
+
+Task 3: Improve Logging & Save Output
+- Copy and paste this terminal output, which has log info, in a text file `docker_out.txt`
+- The docker_out.txt file should include all your log statements plus a line that reads something like ”POST /predict HTTP/1.1” 200 -
+- The docker_out.txt file will be one of two, log output files that will be part of a passing, project submission.
+
 
 #### Run and Build a Docker Image
 
@@ -288,15 +304,25 @@ source /tmp/local_environments/.devops/bin/activate
 sh make_prediction.sh
 ```
 
-docker_out.txt
+```shell
+sh make_prediction.sh
+```
 
 ### 5. Upload the Docker Image
+
+Task 4: Upload the Docker Image
+- If you’ve successfully implemented authentication and tagging, you should see a successful login statement and a repository name that you specified, printed in your terminal.
+- You should also be able to see your image as a repository in your docker hub account
+
 
 ```shell
 ./upload_docker.sh
 ```
 
 ### 6. Configure Kubernetes to Run Locally
+
+Task 5: Configure Kubernetes to Run Locally
+- After minikube starts, a cluster should be running locally. You can check that you have one cluster running by typing kubectl config view where you should see at least one cluster with a certificate-authority and server.
 
 ```shell
 minikube start
@@ -318,6 +344,17 @@ kubectl config view
 
 ### 7. Deploy with Kubernetes and Save Output Logs
 
+Task 6: Deploy with Kubernetes and Save Output Logs
+- run_kubernetes.sh
+  -  Should create a pod with a name you specify
+  -  Initially, your pod may be in the process of being created, as indicated by STATUS: ContainerCreating, but you just have to wait a few minutes until the pod is ready, then you can run the script again.
+  -  Waiting: You can check on your pod’s status with a call to kubectl get pod and you should see the status change to Running. Then you can run the full ./run_kuberenets.sh script again.
+- make_prediction.sh
+  - After pod is up and running
+  - Copy the text output after calling run_kubernetes.sh and paste it into a file kubernetes_out.txt
+  - This will be the second (out of two) text files that are required for submission
+  - This output might look quite different from docker_out.txt; this new file should include your pod’s name and status, as well as the port forwarding and handling text.
+
 #### Deploy Application on the Kubernetes Cluster
 
 ```shell
@@ -331,6 +368,16 @@ kubectl config view
 ```
 
 kubernetes.out.txt
+
+### 8. [Important] Cleanup once done
+
+Clean up resources (e.g. AWS servers)
+
+Delete the Kubernetes Cluster
+
+```shell
+minikube delete
+```
 
 ## C. Files In The Repository
 ```folder-structure
@@ -361,14 +408,14 @@ kubernetes.out.txt
 |crim|per capita crime rate by town|
 |zn|proportion of residential land zoned for lots over 25,000 sq.ft|
 |indus|proportion of non-retail business acres per town|
-|chas|Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)|
+|**chas**|Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)|
 |nox|nitrogen oxides concentration (parts per 10 million)|
-|rm|average number of rooms per dwelling|
+|**rm**|average number of rooms per dwelling|
 |age|proportion of owner-occupied units built prior to 1940|
 |dis|weighted mean of distances to five Boston employment centres|
 |rad|index of accessibility to radial highways|
-|tax|full-value property-tax rate per \$10,000|
-|ptratio|pupil-teacher ratio by town|
-|black|1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town|
-|lstat|lower status of the population (percent)|
+|**tax**|full-value property-tax rate per \$10,000|
+|**ptratio**|pupil-teacher ratio by town|
+|**[black](https://github.com/scikit-learn/scikit-learn/issues/16155)**|1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town|
+|**lstat**|lower status of the population (percent)|
 |medv|median value of owner-occupied homes in \$1000s|
