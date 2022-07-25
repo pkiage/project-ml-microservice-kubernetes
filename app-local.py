@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask.logging import create_logger
 import logging
+import json
 
 import pandas as pd
 from sklearn.externals import joblib
@@ -19,6 +20,14 @@ def scale(payload):
     scaler = StandardScaler().fit(payload.astype(float))
     scaled_adhoc_predict = scaler.transform(payload.astype(float))
     return scaled_adhoc_predict
+
+
+def log_inputs(input_name: str) -> str:
+    form_input = request.form.get(input_name)
+    form_input = float(form_input)
+    LOG.info(
+        f"\nVariable: chas \nValue: {form_input} \nType: {type(form_input)}")
+    return form_input
 
 
 @app.route("/")
@@ -52,22 +61,46 @@ def predict():
         }
 
         result looks like:
-        { "prediction": [ <val> ] }
+        { "prediction" : [ <val> ] }
 
         """
+    # Log inputs
+    chas = int(log_inputs("chas"))
 
-    # Logging the input payload
-    json_payload = request.json
+    rm = log_inputs("rm")
+
+    tax = log_inputs("tax")
+
+    ptratio = log_inputs("ptratio")
+
+    b = log_inputs("b")
+
+    lsat = log_inputs("lsat")
+
+    # Create JSON
+    x = {"CHAS": {"0": chas}, "RM": {"0": rm}, "TAX": {"0": tax},
+         "PTRATIO": {"0": ptratio}, "B": {"0": b}, "LSTAT": {"0": lsat}}
+    json_str = json.dumps(x)
+    json_payload = json.loads(json_str)
+    LOG.info(f"\nInput type: \n{type(json_payload)}")
+
+    # Inputs into string
     LOG.info(f"JSON payload: \n{json_payload}")
     inference_payload = pd.DataFrame(json_payload)
-    LOG.info(f"Inference payload DataFrame: \n{inference_payload}")
+    LOG.info(f"inference_payload DataFrame: \n{inference_payload}")
+    prediction_inference = list(clf.predict(inference_payload))
+    LOG.info(f'prediction_inference: {prediction_inference}')
     # scale the input
     scaled_payload = scale(inference_payload)
+    LOG.info(f"scaled_payload: \n{scaled_payload}")
     # get an output prediction from the pretrained model, clf
-    prediction = list(clf.predict(scaled_payload))
-    # TO DO:  Log the output prediction value
-    LOG.info(f'prediction: {prediction}')
-    return jsonify({'prediction': prediction})
+    prediction_scaled = list(clf.predict(scaled_payload))
+    LOG.info(f'prediction_scaled: {prediction_scaled}')
+    return render_template('index.html',
+                           x=json_payload,
+                           x_scaled=scaled_payload,
+                           y=prediction_inference,
+                           y_scaled=prediction_scaled)
 
 
 if __name__ == "__main__":
