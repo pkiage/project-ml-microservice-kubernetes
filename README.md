@@ -247,12 +247,13 @@ conda activate udacityproject4
 conda install --yes --file requirements.txt
 ```
 
+Run app
+
 ```shell
 python .\app-local.py
 ```
 
-Make prediction via frontend:
-Open http://127.0.0.1:80
+Make prediction via frontend: http://127.0.0.1:80
 
 ### 4. Run a Container & Make a Prediction
 
