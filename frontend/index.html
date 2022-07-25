@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Custom CSS -->
-<!--  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
--->
-
 <!-- Bootstrap CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
@@ -33,39 +29,48 @@
 
     <div class="d-flex justify-content-center">
         <form action="{{url_for('predict')}}" method="post">
+
             <div class="form-group mt-3">
                 <label for="chas">Charles River dummy variable: <br>
                     <span class="fst-italic">1 if tract bounds river; 0 otherwise</span>
                 </label>
-                <input type="text" class="form-control" id="chas" placeholder="Enter CHAS e.g. 0" required="required">
+                <select type="float" class="form-select" id="chas" name="chas" placeholder="Enter CHAS e.g. 0"
+                    required="required">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
             </div>
 
             <div class="form-group mt-3">
-                <label for="rm">Average number of rooms per dwelling:</label>
-                <input type="text" class="form-control" id="rm" placeholder="Enter RM e.g. 6.575" required="required">
+                <label for="rm">Average float of rooms per dwelling:</label>
+                <input type="number" step="0.01" class="form-control" id="rm" name="rm"
+                    placeholder="Enter RM e.g. 6.575" required="required">
             </div>
 
             <div class="form-group mt-3">
                 <label for="tax">Full-value property-tax rate per $10,000:</label>
-                <input type="text" class="form-control" id="tax" placeholder="Enter TAX e.g. 296.0" required="required">
+                <input type="number" step="0.01" class="form-control" id="tax" name="tax"
+                    placeholder="Enter TAX e.g. 296.0" required="required">
             </div>
 
             <div class="form-group mt-3">
                 <label for="ptratio">Pupil-teacher ratio by town:</label>
-                <input type="text" class="form-control" id="ptratio" placeholder="Enter PTRATIO e.g. 15.3"
-                    required="required">
+                <input type="number" step="0.01" class="form-control" id="ptratio" name="ptratio"
+                    placeholder="Enter PTRATIO e.g. 15.3" required="required">
             </div>
 
             <div class="form-group mt-3">
                 <label for="b">Average Area Population:</label>
-                <input type="text" class="form-control" id="b" placeholder="Enter B e.g. 396.9" required="required">
+                <input type="number" step="0.01" class="form-control" id="b" name="b" placeholder="Enter B e.g. 396.9"
+                    required="required">
             </div>
 
             <div class="form-group mt-3">
                 <label for="lsat">Lower status of the population (percent):</label>
-                <input type="text" class="form-control" id="lsat" placeholder="Enter LSAT e.g. 4.98"
-                    required="required">
+                <input type="number" step="0.01" class="form-control" id="lsat" name="lsat"
+                    placeholder="Enter LSAT e.g. 4.98" required="required">
             </div>
+
             <div class="container">
                 <div class="text-center">
                     <button class="btn btn-primary btn-lg mt-3" type="submit">Predict</button>
@@ -73,7 +78,6 @@
             </div>
 
         </form>
-
     </div>
 
     <div class="container">
