@@ -3,26 +3,26 @@
 # Task 2: Run a Container & Make a Prediction
 # CC7-l3-C6-Building and Deploy
 # https://www.docker.com/wp-content/uploads/2022/03/docker-cheat-sheet.pdf
-# https://docs.docker.com/engine/reference/commandline/build/
-# https://docs.docker.com/engine/reference/commandline/docker/
-# https://docs.docker.com/engine/reference/commandline/run/
+# 
 
 ## Complete the following steps to get Docker running locally
 
 # Step 1:
 # Build image and add a descriptive tag
-
+# https://docs.docker.com/engine/reference/commandline/build/
 # name and optionally a tag in the 'name:tag' format
-sudo docker build --tag=mlapi .
+docker build --tag=mlapi .
 
 # Step 2: 
 # List docker images
-sudo docker image ls
+# https://docs.docker.com/engine/reference/commandline/image_ls/
+docker image ls --format
 
-# Step 3: 
+# Step 3:
 # Run flask app
 # 8000 from make_predictions.sh
 # 80 from Dockerfile
-
+# https://docs.docker.com/engine/reference/commandline/run/
 # publish a container's port(s) to the host
-sudo docker run -p 8000:80 mlapi
+# https://docs.docker.com/language/java/run-containers/
+docker run --publish 8000:80 mlapi
