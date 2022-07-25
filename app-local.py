@@ -16,7 +16,7 @@ LOG.setLevel(logging.INFO)
 def scale(payload):
     """Scales Payload"""
 
-    LOG.info(f"Scaling Payload: \n{payload}")
+    LOG.info(f"\nScaling Payload: \n{payload}")
     scaler = StandardScaler().fit(payload.astype(float))
     scaled_adhoc_predict = scaler.transform(payload.astype(float))
     return scaled_adhoc_predict
@@ -26,7 +26,7 @@ def log_inputs(input_name: str) -> str:
     form_input = request.form.get(input_name)
     form_input = float(form_input)
     LOG.info(
-        f"\nVariable: chas \nValue: {form_input} \nType: {type(form_input)}")
+        f"\n| Variable: {input_name} | Value: {form_input} | Type: {type(form_input)} |")
     return form_input
 
 
@@ -82,20 +82,20 @@ def predict():
          "PTRATIO": {"0": ptratio}, "B": {"0": b}, "LSTAT": {"0": lsat}}
     json_str = json.dumps(x)
     json_payload = json.loads(json_str)
-    LOG.info(f"\nInput type: \n{type(json_payload)}")
+    LOG.info(f"\nInput type (json_payload): {type(json_payload)}")
 
     # Inputs into string
-    LOG.info(f"JSON payload: \n{json_payload}")
+    LOG.info(f"\nJSON payload: \n{json_payload}")
     inference_payload = pd.DataFrame(json_payload)
-    LOG.info(f"inference_payload DataFrame: \n{inference_payload}")
+    LOG.info(f"\ninference_payload DataFrame: \n{inference_payload}")
     prediction_inference = list(clf.predict(inference_payload))
-    LOG.info(f'prediction_inference: {prediction_inference}')
+    LOG.info(f'\nprediction_inference: {prediction_inference}')
     # scale the input
     scaled_payload = scale(inference_payload)
-    LOG.info(f"scaled_payload: \n{scaled_payload}")
+    LOG.info(f"\nscaled_payload: \n{scaled_payload}")
     # get an output prediction from the pretrained model, clf
     prediction_scaled = list(clf.predict(scaled_payload))
-    LOG.info(f'prediction_scaled: {prediction_scaled}')
+    LOG.info(f'\nprediction_scaled: {prediction_scaled}')
     return render_template('index.html',
                            x=json_payload,
                            x_scaled=scaled_payload,
