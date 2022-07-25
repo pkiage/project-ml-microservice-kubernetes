@@ -1,6 +1,7 @@
 [![pkiage](https://circleci.com/gh/pkiage/project-ml-microservice-kubernetes.svg?style=svg)](https://app.circleci.com/pipelines/github/pkiage/project-ml-microservice-kubernetes)
 
-# Udacity - Cloud DevOps Engineering - Project 4: Operationalize Machine Learning Microservice API
+# [Udacity - Cloud DevOps Engineering - Project 4: Operationalize Machine Learning Microservice API](https://github.com/pkiage/course-DevOps_Microservices/tree/master/project-ml-microservice-kubernetes)
+
 
 ## A. Project Summary
 
@@ -228,7 +229,7 @@ make lint
 ### 4. [optional] Run App Locally (standalone using Anaconda on local machine)
 
 Prerequisite:
-- Have Anaconda installed with Anaconda Powershell Prompt
+- Have Anaconda installed with preferably with Anaconda Powershell Prompt
 
 Open Anaconda Prompt
 
@@ -248,25 +249,6 @@ conda install --yes --file requirements.txt
 
 ```shell
 python .\app-local.py
-```
-
-Open another anaconda prompt window
-
-```
-conda activate udacityproject4
-```
-
-To prevent shell script from closing after running
-```shell
-echo read -p 'Press enter to continue' >> make_prediction.sh
-
-# https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/type
-type make_prediction.sh
-```
-
-Make prediction via terminal
-```shell
-make_prediction.sh
 ```
 
 Make prediction via frontend:
@@ -362,6 +344,7 @@ kubernetes.out.txt
 ├── rubric.png                            ### Udacity Project 4 Rubric
 ├── run_docker.sh                         ### Enables getting Docker running, locally
 ├── run_kubernetes.sh                     ### Deploys application on the Kubernetes cluster (after uploaded docker image and configured Kubernetes so that a cluster is running)
+├── test-predictions.ipynb                ### Jupyter notebook testing predictions made using the pre-trained model and sample data
 └── upload_docker.sh                      ### Uploads built image to docker to make it accessible to a Kubernets cluster
 ```
 
