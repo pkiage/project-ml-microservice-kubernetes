@@ -161,6 +161,11 @@ VSCode > Source Control > Clone Repository > Repository Url > Clone From Url > S
 cd project-ml-microservice-kubernetes
 ```
 
+Hint ensure on the right branch (develop or master)
+
+```shell
+git checkout branch_name
+```
 
 ### 1. [optional] Run App Locally (standalone using Anaconda on local machine)
 
@@ -251,7 +256,7 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```shell
 docker --version
 
-minicube version
+minikube version
 
 kubectl version --output=yaml
 ```
@@ -306,11 +311,9 @@ source /tmp/local_environments/.devops/bin/activate
 sh make_prediction.sh
 ```
 
-```shell
-sh make_prediction.sh
-```
-
 ### 5. Upload the Docker Image
+
+In terminal window server was running `CTRL+C`
 
 Task 4: Upload the Docker Image
 - If you’ve successfully implemented authentication and tagging, you should see a successful login statement and a repository name that you specified, printed in your terminal.
@@ -318,7 +321,7 @@ Task 4: Upload the Docker Image
 
 
 ```shell
-sudo ./upload_docker.sh
+sudo sh upload_docker.sh
 ```
 
 Hint:
@@ -340,6 +343,28 @@ Hint if permission denied error run:
 sudo usermod -aG docker ${USER}
 
 sudo su -${USER}
+```
+
+If space issues may have to delete files
+```shell
+rm -rf frontend 
+rm frontend-localhost-windows.mp4
+rm frontend-localhost-windows.mp4
+rm test-predictions.ipynb
+```
+
+Specify space
+
+```shell
+# recommended minimum 1900MB
+'minikube start --memory=1900mb'
+```
+
+or add volume size of EC2 instance and confirm 
+
+```shell
+# recommended minimum 1900MB
+df -h
 ```
 
 #### Verify
