@@ -15,6 +15,8 @@ docker build --tag=mlapi .
 
 # Step 2: 
 # List docker images
+# Verifies is above image created
+# should show image with repository name equivalent to that specified in tag
 # https://docs.docker.com/engine/reference/commandline/image_ls/
 docker image ls --format
 
