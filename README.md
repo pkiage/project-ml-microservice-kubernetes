@@ -367,6 +367,20 @@ or add volume size of EC2 instance and confirm
 df -h
 ```
 
+[If still error try](https://stackoverflow.com/questions/58663599/minikube-start-fails-with-requested-disk-size-0mb-is-less-than-minimum-of-200)
+
+```shell
+minikube config view
+
+minikube config set disk-size value_from_above_command
+
+minikube delete
+
+minikube start
+```
+
+Wait for completion
+
 #### Verify
 
 ```shell
