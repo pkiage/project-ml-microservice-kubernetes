@@ -21,8 +21,6 @@
 # same dockerpath as specified in upload_docker.sh
 dockerpath="pkiage/mlapi:v0.0.1"
 
-wait $!
-
 # Step 2
 # Run the Docker Hub container with kubernetes
 # https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run
@@ -32,15 +30,11 @@ kubectl run mlapi\
     --port=80\
     --labels app=mlapi
 
-wait $!
-
 # Step 3:
 # List kubernetes pods
 # https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get
 # Display one or many resources.
 kubectl get pods
-
-wait $!
 
 # Step 4:
 # Forward the container port to a host
