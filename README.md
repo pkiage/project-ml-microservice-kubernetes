@@ -244,9 +244,9 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 # Install kubectl binary with curl on Linux
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+# curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 
-echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+# echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
@@ -281,8 +281,8 @@ Task 2: Run a Container & Make a Prediction
 
 Task 3: Improve Logging & Save Output
 - Copy and paste this terminal output, which has log info, in a text file `docker_out.txt`
-- The docker_out.txt file should include all your log statements plus a line that reads something like `POST /predict HTTP/1.1” 200 -`
-- The docker_out.txt file will be one of two, log output files that will be part of a passing, project submission.
+- The `docker_out.txt` file should include all your log statements plus a line that reads something like `POST /predict HTTP/1.1” 200 -`
+- The `docker_out.txt` file will be one of two, log output files that will be part of a passing, project submission.
 
 
 #### Run and Build a Docker Image
@@ -293,7 +293,7 @@ sh run_docker.sh
 
 Open another terminal window (Terminal B until explicitly stated otherwise)
 
-[optional] view home of app (as defined in app.py):
+[optional] view home of app (as defined in `app.py`):
 
 ```shell
 curl localhost:8000
