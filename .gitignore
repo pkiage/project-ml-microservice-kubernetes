@@ -4,3 +4,4 @@ chmod400
 ignore
 .vscode
 .pem
+.ipynb_checkpoints
