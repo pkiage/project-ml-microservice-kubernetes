@@ -142,7 +142,7 @@ sudo passwd ubuntu
 
 sudo usermod -aG docker ${USER}
 
-sudo su -${USER}
+sudo su - ${USER}
 
 id -nG
 ```
