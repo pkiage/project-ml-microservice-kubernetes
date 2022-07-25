@@ -165,7 +165,41 @@ VSCode > Source Control > Clone Repository > Repository Url > Clone From Url > S
 cd project-ml-microservice-kubernetes
 ```
 
+
+### 1. [optional] Run App Locally (standalone using Anaconda on local machine)
+
+Tested in Windows OS
+
+Prerequisite:
+- Have Anaconda installed with preferably with Anaconda Powershell Prompt
+
+Open Anaconda Prompt
+
+[Manage anaconda environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+
+```shell
+conda create -n udacityproject4 python=3.7.3
+
+conda activate udacityproject4
+```
+
+[Install requirements](https://docs.conda.io/projects/conda/en/latest/commands/install.html)
+
+```
+conda install --yes --file requirements.txt
+```
+
+Run app
+
+```shell
+python .\app-local.py
+```
+
+Make prediction via frontend: http://127.0.0.1:80
+
 ### 2. Create and Activate Environment
+
+Henceforth preferably in Unix OS - tested in Debian Distro (Ubuntu)
 
 ```shell
 # CC7-L2-C6
@@ -225,35 +259,6 @@ kubectl version --output=yaml
 ```shell
 make lint
 ```
-
-### 4. [optional] Run App Locally (standalone using Anaconda on local machine)
-
-Prerequisite:
-- Have Anaconda installed with preferably with Anaconda Powershell Prompt
-
-Open Anaconda Prompt
-
-[Manage anaconda environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-
-```shell
-conda create -n udacityproject4 python=3.7.3
-
-conda activate udacityproject4
-```
-
-[Install requirements](https://docs.conda.io/projects/conda/en/latest/commands/install.html)
-
-```
-conda install --yes --file requirements.txt
-```
-
-Run app
-
-```shell
-python .\app-local.py
-```
-
-Make prediction via frontend: http://127.0.0.1:80
 
 ### 4. Run a Container & Make a Prediction
 
