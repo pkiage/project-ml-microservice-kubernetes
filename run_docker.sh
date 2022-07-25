@@ -3,7 +3,18 @@
 # Task 2: Run a Container & Make a Prediction
 # CC7-l3-C6-Building and Deploy
 # https://www.docker.com/wp-content/uploads/2022/03/docker-cheat-sheet.pdf
-# 
+
+# https://www.docker.com/resources/what-container/
+# A container is a standard unit of software that packages up code 
+# and all its dependencies 
+# so the application runs quickly and reliably 
+# from one computing environment to another.
+
+# Container images become containers at runtime
+# https://docs.docker.com/get-started/overview/
+# An image is a read-only template with instructions 
+# for creating a Docker container.
+
 
 ## Complete the following steps to get Docker running locally
 
