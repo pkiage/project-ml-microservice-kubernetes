@@ -28,13 +28,10 @@ COPY . app.py /app/
 # execute any commands in a new layer 
 # on top of the current image and commit the results
 # resulting committed image will be used 
-# for the next step in the Dockerfile.
-
-# install similar to Makefile
-# Disabling caching to save space: https://pip.pypa.io/en/stable/topics/caching/
-RUN	pip install  --no-cache-dir --upgrade pip &&\
-		pip install  --no-cache-dir -r requirements.txt
-        
+# for the next step in the Dockerfil
+# hadolint ignore=DL3013
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt        
 ## Step 4:
 # Expose port 80
 # https://docs.docker.com/engine/reference/builder/#expose
