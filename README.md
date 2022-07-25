@@ -108,6 +108,8 @@ Python3:
 
 ```shell
 sudo apt-get upgrade python3
+
+sudo apt-get install python3-venv
 ```
 
 Make:
@@ -207,12 +209,6 @@ Henceforth preferably in Unix OS - tested in Debian Distro (Ubuntu)
 mkdir /tmp/local_environments
 python3 -m venv /tmp/local_environments/.devops
 source /tmp/local_environments/.devops/bin/activate
-```
-
-Hint if using VSCode Remote Explorer may have to run the command below before creating environment
-
-```shell
-sudo apt-get install python3-venv
 ```
 
 #### Install Dependencies
@@ -379,6 +375,16 @@ minikube delete
 minikube start
 ```
 
+[If error getting ip during provisioning: IPs output should only be one line, got 2 lines](https://github.com/kubernetes/minikube/issues/8338)
+
+With other terminal window closed
+
+```shell
+sudo rm -rf ~/.docker/config.json
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+```
+
 Wait for completion
 
 #### Verify
@@ -403,13 +409,26 @@ Task 6: Deploy with Kubernetes and Save Output Logs
 #### Deploy Application on the Kubernetes Cluster
 
 ```shell
-./run_kubernetes.sh
+sudo sh run_kubernetes.sh
 ```
+
+Check if pod is running (waint about 2 minutes)
+```shell
+kubectl get pod
+```
+
+Once running run `run_kubernetes.sh` again
 
 #### Make a Prediction
 
+In another terminal
+
+```
+source /tmp/local_environments/.devops/bin/activate
+```
+
 ```shell
-./make_prediction.sh
+sudo sh make_prediction.sh
 ```
 
 ### 8. [Important] Cleanup once done
