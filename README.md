@@ -204,6 +204,12 @@ python3 -m venv /tmp/local_environments/.devops
 source /tmp/local_environments/.devops/bin/activate
 ```
 
+Hint if using VSCode Remote Explorer may have to run the command below before creating environment
+
+```shell
+sudo apt-get install python3-venv
+```
+
 #### Install Dependencies
 
 ```shell
