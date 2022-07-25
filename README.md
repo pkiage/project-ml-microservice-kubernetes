@@ -76,7 +76,7 @@ Host connection_name
 ```
 
 - connection_name: udacity_project4
-- path_to_ssh_key: C:\Users\user_name\.ssh\key_name.pem
+- path_to_ssh_key: `C:\Users\user_name\.ssh\key_name.pem`
 
 #### 3. [if permission denied (public key) and using Windows OS] [Public Key Settings](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls) 
 
@@ -90,9 +90,9 @@ Hint:
 - Ensure using the correct aws configure
 
 #### 3. [if error: "The process tried to write to a nonexistent pipe" ](https://stackoverflow.com/questions/60335069/vscode-remote-connection-error-the-process-tried-to-write-to-a-nonexistent-pipe)
-1. Delete ssh config folder both in C:\Program Data\ssh and C:\<user>\.ssh
+1. Delete ssh config folder both in `C:\Program Data\ssh` and `C:\<user>\.ssh`
 2. VSCode > Open a Remote Window > Connect to Host (Remote-SSH) > Add New SSH Host.. 
-3. ssh -i "C:\path\to\key" user@host
+3. `ssh -i "C:\path\to\key" user@host`
 4. Select `C:\<user>\.ssh`
 5. Click connect
 
@@ -146,10 +146,6 @@ sudo su -${USER}
 
 id -nG
 ```
-
-Hadolint:
-
-
 
 #### 5. Clone Repository
 
@@ -267,14 +263,14 @@ make lint
 ### 4. Run a Container & Make a Prediction
 
 Task 2: Run a Container & Make a Prediction
-- run_docker.sh
+- `run_docker.sh`
   - After a brief waiting period, you should see messages indicating a successful build, along with some indications that your app is being served on port 80 (also, a warning about the development server is to be expected, here).
-- make_prediction.sh
+- `make_prediction.sh`
   - In the prediction window, you should see the value of the prediction, and in your main window, where it indicates that your application is running, you should see some log statements print out
 
 Task 3: Improve Logging & Save Output
 - Copy and paste this terminal output, which has log info, in a text file `docker_out.txt`
-- The docker_out.txt file should include all your log statements plus a line that reads something like ”POST /predict HTTP/1.1” 200 -
+- The docker_out.txt file should include all your log statements plus a line that reads something like `POST /predict HTTP/1.1” 200 -`
 - The docker_out.txt file will be one of two, log output files that will be part of a passing, project submission.
 
 
@@ -316,8 +312,12 @@ Task 4: Upload the Docker Image
 
 
 ```shell
-./upload_docker.sh
+sudo ./upload_docker.sh
 ```
+
+Hint:
+- Consider running `docker login` before running `upload_docker.sh`
+- Confirm uploaded by viewing `hub.docker.com/repository/dockerpath` (replace dockerpath with what specified in `upload_docker.sh`)
 
 ### 6. Configure Kubernetes to Run Locally
 
@@ -345,15 +345,15 @@ kubectl config view
 ### 7. Deploy with Kubernetes and Save Output Logs
 
 Task 6: Deploy with Kubernetes and Save Output Logs
-- run_kubernetes.sh
+- `run_kubernetes.sh`
   -  Should create a pod with a name you specify
   -  Initially, your pod may be in the process of being created, as indicated by STATUS: ContainerCreating, but you just have to wait a few minutes until the pod is ready, then you can run the script again.
-  -  Waiting: You can check on your pod’s status with a call to kubectl get pod and you should see the status change to Running. Then you can run the full ./run_kuberenets.sh script again.
-- make_prediction.sh
+  -  Waiting: You can check on your pod’s status with a call to kubectl get pod and you should see the status change to Running. Then you can run the full `./run_kuberenets.sh` script again.
+- `make_prediction.sh`
   - After pod is up and running
-  - Copy the text output after calling run_kubernetes.sh and paste it into a file kubernetes_out.txt
+  - Copy the text output after calling run_kubernetes.sh and paste it into a file `kubernetes_out.txt`
   - This will be the second (out of two) text files that are required for submission
-  - This output might look quite different from docker_out.txt; this new file should include your pod’s name and status, as well as the port forwarding and handling text.
+  - This output might look quite different from `docker_out.txt`; this new file should include your pod’s name and status, as well as the port forwarding and handling text.
 
 #### Deploy Application on the Kubernetes Cluster
 
@@ -366,8 +366,6 @@ Task 6: Deploy with Kubernetes and Save Output Logs
 ```shell
 ./make_prediction.sh
 ```
-
-kubernetes.out.txt
 
 ### 8. [Important] Cleanup once done
 
@@ -416,6 +414,6 @@ minikube delete
 |rad|index of accessibility to radial highways|
 |**tax**|full-value property-tax rate per \$10,000|
 |**ptratio**|pupil-teacher ratio by town|
-|**[black](https://github.com/scikit-learn/scikit-learn/issues/16155)**|1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town|
+|**[black](https://github.com/scikit-learn/scikit-learn/issues/16155)**|1000(Bk - 0.63)^2 where Bk is the proportion of black people by town|
 |**lstat**|lower status of the population (percent)|
 |medv|median value of owner-occupied homes in \$1000s|
