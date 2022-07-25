@@ -77,7 +77,7 @@ Host connection_name
 - connection_name: udacity_project4
 - path_to_ssh_key: C:\Users\user_name\.ssh\key_name.pem
 
-#### 3. [if permission denied (public key)] Public Key Settings 
+#### 3. [if permission denied (public key) and using Windows OS] [Public Key Settings](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls) 
 
 ```shell
 icacls.exe path_to_ssh_key /reset
@@ -86,7 +86,6 @@ icacls.exe path_to_ssh_key /inheritance:r
 ```
 
 Hint: 
-- Ensure using same email address as that in AWS
 - Ensure using the correct aws configure
 
 #### 3. [if error: "The process tried to write to a nonexistent pipe" ](https://stackoverflow.com/questions/60335069/vscode-remote-connection-error-the-process-tried-to-write-to-a-nonexistent-pipe)
@@ -95,6 +94,67 @@ Hint:
 3. ssh -i "C:\path\to\key" user@host
 4. Select `C:\<user>\.ssh`
 5. Click connect
+
+#### 4. Initial Setup (in Server)
+
+Update existing packages:
+
+```shell
+sudo apt-get update
+```
+
+Python3:
+
+```shell
+sudo apt-get upgrade python3
+```
+
+Make:
+
+```shell
+sudo apt install make
+```
+
+[Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04):
+
+```shell
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+sudo apt update -y
+
+apt-cache policy docker-ce
+
+sudo apt install docker-ce -y
+
+sudo systemctl status docker
+
+```
+
+*Add username to docker group (to avoid sudo each time running docker)*
+
+```shell
+sudo passwd ubuntu
+
+sudo usermod -aG docker ${USER}
+
+sudo su -${USER}
+
+id -nG
+```
+
+Hadolint:
+
+
+
+#### 5. Clone Repository
+
+VSCode > Source Control > Clone Repository > Repository Url > Clone From Url > Select Location to Clone To
+
+- Repository Url: https://github.com/pkiage/project-ml-microservice-kubernetes.git
 
 ## B. Running The Python Scripts & Web App
 
@@ -107,6 +167,7 @@ cd project-ml-microservice-kubernetes
 ### 2. Create and Activate Environment
 
 ```shell
+# CC7-L2-C6
 mkdir /tmp/local_environments
 python3 -m venv /tmp/local_environments/.devops
 source /tmp/local_environments/.devops/bin/activate
@@ -118,20 +179,34 @@ source /tmp/local_environments/.devops/bin/activate
 make install
 ```
 
-Hadolint:
+[Hadolint](https://github.com/pkiage/project-ml-microservice-kubernetes/blob/master/.circleci/config.yml):
 
 ```shell
-sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64 
+sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
 
 sudo chmod +x /bin/hadolint
 ```
 
-Kubernetes (Minikube):
+[Minikube:](https://minikube.sigs.k8s.io/docs/start/)
 
 ```shell
+# OS: Linux; Architecture: x86-64; Release type: Stable; Installer type: Binary download
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+[Kubectl:](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
+```shell
+# Install kubectl binary with curl on Linux
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
 #### Confirm Requirementes Installed
@@ -139,7 +214,9 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```shell
 docker --version
 
-kubectl version
+minicube version
+
+kubectl version --output=yaml
 ```
 
 ### 3. Run Lint Check
@@ -148,21 +225,76 @@ kubectl version
 make lint
 ```
 
-### 4. [optional] Run App Locally (standalone)
+### 4. [optional] Run App Locally (standalone using Anaconda on local machine)
+
+Prerequisite:
+- Have Anaconda installed with Anaconda Powershell Prompt
+
+Open Anaconda Prompt
+
+[Manage anaconda environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 
 ```shell
-python3 app.py
+conda create -n udacityproject4 python=3.7.3
+
+conda activate udacityproject4
 ```
+
+[Install requirements](https://docs.conda.io/projects/conda/en/latest/commands/install.html)
+
+```
+conda install --yes --file requirements.txt
+```
+
+```shell
+python .\app-local.py
+```
+
+Open another anaconda prompt window
+
+```
+conda activate udacityproject4
+```
+
+To prevent shell script from closing after running
+```shell
+echo read -p 'Press enter to continue' >> make_prediction.sh
+
+# https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/type
+type make_prediction.sh
+```
+
+Make prediction via terminal
+```shell
+make_prediction.sh
+```
+
+Make prediction via frontend:
+Open http://127.0.0.1:80
 
 ### 4. Run a Container & Make a Prediction
 
 #### Run and Build a Docker Image
 
 ```shell
-sudo sh run_docker.sh
+sh run_docker.sh
+```
+
+Open another terminal window (Terminal B until explicitly stated otherwise)
+
+[optional] view home of app (as defined in app.py):
+
+```shell
+curl localhost:8000
 ```
 
 #### Make a Prediction
+
+Ensure in the virtual environment:
+
+```
+source /tmp/local_environments/.devops/bin/activate
+```
 
 ```shell
 sh make_prediction.sh
@@ -180,6 +312,14 @@ docker_out.txt
 
 ```shell
 minikube start
+```
+
+Hint if permission denied error run:
+
+```shell
+sudo usermod -aG docker ${USER}
+
+sudo su -${USER}
 ```
 
 #### Verify
@@ -222,5 +362,24 @@ kubernetes.out.txt
 ├── rubric.png                            ### Udacity Project 4 Rubric
 ├── run_docker.sh                         ### Enables getting Docker running, locally
 ├── run_kubernetes.sh                     ### Deploys application on the Kubernetes cluster (after uploaded docker image and configured Kubernetes so that a cluster is running)
-├── upload_docker.sh                      ### Uploads built image to docker to make it accessible to a Kubernets cluster
+└── upload_docker.sh                      ### Uploads built image to docker to make it accessible to a Kubernets cluster
 ```
+
+### [housing.csv](https://github.com/pkiage/project-ml-microservice-kubernetes/blob/master/model_data/housing.csv) [data description](https://www.kaggle.com/c/boston-housing)
+
+|Abbreviation|Description|
+|---|---|
+|crim|per capita crime rate by town|
+|zn|proportion of residential land zoned for lots over 25,000 sq.ft|
+|indus|proportion of non-retail business acres per town|
+|chas|Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)|
+|nox|nitrogen oxides concentration (parts per 10 million)|
+|rm|average number of rooms per dwelling|
+|age|proportion of owner-occupied units built prior to 1940|
+|dis|weighted mean of distances to five Boston employment centres|
+|rad|index of accessibility to radial highways|
+|tax|full-value property-tax rate per \$10,000|
+|ptratio|pupil-teacher ratio by town|
+|black|1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town|
+|lstat|lower status of the population (percent)|
+|medv|median value of owner-occupied homes in \$1000s|
