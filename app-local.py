@@ -7,14 +7,13 @@ from sklearn.externals import joblib
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__,
-            template_folder='frontend/html',
-            static_folder='frontend/static')
+            template_folder='frontend')
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
 
 
 def scale(payload):
-    """Scales Payload """
+    """Scales Payload"""
 
     LOG.info(f"Scaling Payload: \n{payload}")
     scaler = StandardScaler().fit(payload.astype(float))
