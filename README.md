@@ -200,6 +200,8 @@ python .\app-local.py
 
 Make prediction via frontend: http://127.0.0.1:80
 
+![frontend](frontend-localhost-windows.gif)
+
 ### 2. Create and Activate Environment
 
 Henceforth preferably in Unix OS - tested in Debian Distro (Ubuntu)
