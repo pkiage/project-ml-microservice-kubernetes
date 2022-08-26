@@ -463,6 +463,7 @@ minikube delete
 ├── app-local.py                          ### Python flask app that serves out predictions (inference) about housing prices through API calls - for optional local testing with frontend
 ├── app.py                                ### Python flask app that serves out predictions (inference) about housing prices through API calls - deployed on Kubernetes cluster (doesn't include frontend)
 ├── Dockerfile                            ### Contains all commands a user could call on command line to assemble an image
+├── frontend-localhost-windows.gif        ### GIF showing demo of simple web application front-end to accept user input and produce a prediction. Tested on local host using Windows OS.
 ├── make_predictions.sh                   ### Sends some input into containerized application via appropriate port
 ├── requirements.txt                      ### List of Python dependencies for the project
 ├── rubric.png                            ### Udacity Project 4 Rubric
