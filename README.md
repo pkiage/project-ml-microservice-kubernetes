@@ -468,7 +468,7 @@ minikube delete
 ├── rubric.png                            ### Udacity Project 4 Rubric
 ├── run_docker.sh                         ### Enables getting Docker running, locally
 ├── run_kubernetes.sh                     ### Deploys application on the Kubernetes cluster (after uploaded docker image and configured Kubernetes so that a cluster is running)
-├── test-predictions.ipynb                ### Jupyter notebook testing predictions made using the pre-trained model and sample data
+├── test-predictions.ipynb                ### Jupyter notebook testing predictions made using the pre-trained model and sample data (includes references to AI ethics discussions)
 └── upload_docker.sh                      ### Uploads built image to docker to make it accessible to a Kubernets cluster
 ```
 
