@@ -3,7 +3,7 @@
 # [Udacity - Cloud DevOps Engineering - Project 4: Operationalize Machine Learning Microservice API](https://github.com/pkiage/course-DevOps_Microservices/tree/master/project-ml-microservice-kubernetes)
 
 
-## A. Project Summary
+## A. Project Brief
 
 In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
 
@@ -445,8 +445,10 @@ minikube delete
 
 ## C. Files In The Repository
 ```folder-structure
-├── .circleci               
+├──  .circleci               
 │   └── config.yml                        ### CircleCI configuration file
+├── frontend                              ### [Flask](https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask) instance [template](https://flask.palletsprojects.com/en/2.2.x/templating/) folder used in app-local.py
+│   └── index.html                        ### Name of template rendered by [render_template()](https://flask.palletsprojects.com/en/2.2.x/api/#flask.render_template) method - used in app-local.py             
 ├── model_data  
 |   ├── boston_housing_prediction.joblib  ### Presisted Python object to be loaded in app.py (pre-trained model)
 |   └── housing.csv                       ### Data used in pre-trained model                      
@@ -454,7 +456,8 @@ minikube delete
 |   ├── docker_out.txt                    ### Log statements from app.py following executing run_docker.sh
 |   └── kubernetes_out.txt                ### Log statements after running a prediction via Kubernetes deployment
 ├── .gitignore                            ### Files and directories to ignore from git history
-├── app.py                                ### Python flask app that serves out predictions (inference) about housing prices through API calls
+├── app-local.py                          ### Python flask app that serves out predictions (inference) about housing prices through API calls - for optional local testing with frontend
+├── app.py                                ### Python flask app that serves out predictions (inference) about housing prices through API calls - deployed on Kubernetes cluster (doesn't include frontend)
 ├── Dockerfile                            ### Contains all commands a user could call on command line to assemble an image
 ├── make_predictions.sh                   ### Sends some input into containerized application via appropriate port
 ├── requirements.txt                      ### List of Python dependencies for the project
