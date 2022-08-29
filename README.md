@@ -178,7 +178,7 @@ git checkout branch_name
 Tested in Windows OS
 
 Prerequisite:
-- Have Anaconda installed with preferably with Anaconda Powershell Prompt
+- Have Anaconda installed preferably with Anaconda Powershell Prompt
 
 Open Anaconda Prompt
 
